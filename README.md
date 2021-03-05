@@ -28,6 +28,21 @@ This is a set of three python scripts intended for numerical recognition in time
  
  This script will ask you an input parameter file name (The output file of the previous script) and a name for an output file. Basically this script selects the video frames to analyze, matching with the frequency of data adquisition selected in the first script. The code will create a folder and save the selected frames in .png format. I know this is not optimal and quite ugly, but since this is the more time requirement script, by saving the frames you will only have to run it once in case the final script fails.
  
- 
+### Data_Reading
+  In this case, will be two options to execute the script. The first one, as usual, run the command:<br>
+  
+  $ python3 Lecture.py<br>
+  
+  Or if you have knowledge on parallel computing, there is a version that can be executed in multiple cores. For this, you need to have installed the mpi4py module and run:<br>
+  
+  $mpiexec -n 4 python3 Lecture_Parallel.py<br>
+  
+  where instead of 4 you can put the number of cores that you want to use. This can reduce significantly the reading time for large data series.<br>
+  
+  The interaction with the program is the same for both options, you will only have to give an input parameter file (the output file of the second script) and a output file, with the read data. The latter will display in a two column format the time and the value read for each frame.<br>
+  
+  If the read process end succesfully, you can remove the folder containing all the selected frames.
+  
+  
   
   
