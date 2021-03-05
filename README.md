@@ -26,7 +26,7 @@ This is a set of three python scripts intended for numerical recognition in time
  
  $ python3 Frame_Selection.py<br>
  
- This script will ask you an input parameter file name (The output file of the previous script) and a name for an output file. Basically this script selects the video frames to analyze, matching with the frequency of data adquisition selected in the first script. The code will create a folder and save the selected frames in a png format. I know this is not optimal and quite ugly, but since this is the more time requirement script, saving the frames you will only have to run it once in case the final script fails.
+ This script will ask you an input parameter file name (The output file of the previous script) and a name for an output file. Basically this script selects the video frames to analyze, matching with the frequency of data adquisition selected in the first script. The code will create a folder and save the selected frames in .png format. I know this is not optimal and quite ugly, but since this is the more time requirement script, saving the frames you will only have to run it once in case the final script fails.
  
  
   
