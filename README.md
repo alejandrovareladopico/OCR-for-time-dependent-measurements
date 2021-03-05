@@ -35,7 +35,7 @@ This is a set of three python scripts intended for numerical recognition in time
   
   Or if you have knowledge on parallel computing, there is a version that can be executed in multiple cores. For this, you need to have installed the mpi4py module and run:<br>
   
-  $mpiexec -n 4 python3 Lecture_Parallel.py<br>
+  $ mpiexec -n 4 python3 Lecture_Parallel.py<br>
   
   where instead of 4 you can put the number of cores that you want to use. This can reduce significantly the reading time for large data series.<br>
   
