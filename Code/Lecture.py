@@ -10,15 +10,15 @@ t0 = time.time()
 
 lectures = []
 recorte = np.zeros((int(y1)-int(y0), int(x1)-int(x0)), np.uint8)
-time = np.zeros(int(saved_data), float)
+timer = np.zeros(int(saved_data), float)
 for i in range(int(saved_data)):
-    frame = cv2.imread(str(i)+".png")
+    frame = cv2.imread("Frames/"+str(i)+".png")
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     frame_ROI = funciones.ROI(gray, int(x0), int(x1), int(y0), int(y1), recorte)
     mask = cv2.inRange(frame_ROI, int(lower_bound), int(upper_bound))
     res = cv2.bitwise_and(frame_ROI, frame_ROI, mask = mask)
     res_blur = cv2.GaussianBlur(res, (int(kernel_blur_size), int(kernel_blur_size)), 0)
-    if edgy = "y":
+    if edgy == "y":
         edged = cv2.Canny(res_blur, 100, 200)
     else:
         edged = res_blur
@@ -34,7 +34,7 @@ for i in range(int(saved_data)):
     else:
         pass
     lectures.append(funciones.lecture(data_rot, language))
-    time[i] = i*float(frequency)
+    timer[i] = i*float(frequency)
 
 print("Done, elapsed time:", (time.time()-t0)/60, "minutes")
 
@@ -44,7 +44,7 @@ data_float = np.zeros(len(lectures), float)
 for i in range(len(lectures)):
     data_float[i] = float(lectures[i])
 
-final_data = np.array([time, data_float])
+final_data = np.array([timer, data_float])
 
 file = open(data_out, "w")
 np.savetxt(file, final_data.T, "%.3f")

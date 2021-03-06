@@ -30,16 +30,16 @@ if rank == (size - 1):
     local_end = local_end + (int(saved_data) % size)
 
 for i in range(local_start, local_end, 1):
-    frame = cv2.imread(str(i)+".png")
+    frame = cv2.imread("Frames/"+str(i)+".png")
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     frame_ROI = funciones.ROI(gray, int(x0), int(x1), int(y0), int(y1), recorte)
     mask = cv2.inRange(frame_ROI, int(lower_bound), int(upper_bound))
     res = cv2.bitwise_and(frame_ROI, frame_ROI, mask = mask)
     res_blur = cv2.GaussianBlur(res, (int(kernel_blur_size), int(kernel_blur_size)), 0)
-    if edgy = "y":
+    if edgy == "y":
         edged = cv2.Canny(res_blur, 100, 200)
     else:
-        edged = res_blur    
+        edged = res_blur
     dilated = cv2.dilate(edged, None, iterations = int(dilate_iterations))
     eroded = cv2.erode(dilated, None, iterations = 1)
     ret,data = cv2.threshold(eroded,0,255,cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
@@ -60,13 +60,13 @@ if rank == 0:
         data_recv = comm.recv(data, source = i)
         lectures += data_recv
 
-    time = np.zeros(int(saved_data), float)
+    timer = np.zeros(int(saved_data), float)
     data_float = np.zeros(len(lectures), float)
     for i in range(len(lectures)):
         data_float[i] = float(lectures[i])
-        time[i] = i*float(frequency)
+        timer[i] = i*float(frequency)
 
-    final_data = np.array([time, data_float])
+    final_data = np.array([timer, data_float])
     t1 = time.time()
     file = open(data_out, "w")
     np.savetxt(file, final_data.T, "%.3f")

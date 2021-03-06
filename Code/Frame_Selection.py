@@ -1,10 +1,14 @@
 import cv2
 import numpy as np
 import time
+import os
 
 param_file = str(input("Parameter file name(in)(.txt): "))
 
 name, num_frames, height, width, fps, x0, x1, y0, y1, lower_bound, upper_bound, kernel_blur_size, edgy, dilate_iterations, rot, inv, axis, frequency, language = np.loadtxt(param_file, str)
+
+folder = "Frames"
+os.mkdir(folder)
 
 video = cv2.VideoCapture(name)
 
@@ -14,7 +18,7 @@ for i in range(int(num_frames)):
     frame = video.read(i)[1]
     if i % (float(frequency)*int(fps)) == 0.:
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        cv2.imwrite(str(saved_data)+".png", gray)
+        cv2.imwrite("Frames/"+str(saved_data)+".png", gray)
         saved_data = saved_data + 1
 video.release()
 
