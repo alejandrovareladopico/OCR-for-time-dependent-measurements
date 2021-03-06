@@ -1,0 +1,51 @@
+import numpy as np
+import funciones
+import cv2
+import time
+
+param_name = str(input("Parameter file name(in): "))
+num_frames, height, width, fps, x0, x1, y0, y1, lower_bound, upper_bound, kernel_blur_size, edgy, dilate_iterations, rot, inv, axis, frequency, language, saved_data = np.loadtxt(param_name, str)
+
+t0 = time.time()
+
+lectures = []
+recorte = np.zeros((int(y1)-int(y0), int(x1)-int(x0)), np.uint8)
+time = np.zeros(int(saved_data), float)
+for i in range(int(saved_data)):
+    frame = cv2.imread(str(i)+".png")
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    frame_ROI = funciones.ROI(gray, int(x0), int(x1), int(y0), int(y1), recorte)
+    mask = cv2.inRange(frame_ROI, int(lower_bound), int(upper_bound))
+    res = cv2.bitwise_and(frame_ROI, frame_ROI, mask = mask)
+    res_blur = cv2.GaussianBlur(res, (int(kernel_blur_size), int(kernel_blur_size)), 0)
+    if edgy = "y":
+        edged = cv2.Canny(res_blur, 100, 200)
+    else:
+        edged = res_blur
+    dilated = cv2.dilate(edged, None, iterations = int(dilate_iterations))
+    eroded = cv2.erode(dilated, None, iterations = 1)
+    ret,data = cv2.threshold(eroded,0,255,cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+    if int(rot) == 1:
+        data_rot = funciones.rotation(data)
+    else:
+        data_rot = data
+    if inv == "y":
+        data_rot = funciones.inversion(data_rot, int(axis))
+    else:
+        pass
+    lectures.append(funciones.lecture(data_rot, language))
+    time[i] = i*float(frequency)
+
+print("Done, elapsed time:", (time.time()-t0)/60, "minutes")
+
+data_out = str(input("Read data file name(out)(.txt): "))
+
+data_float = np.zeros(len(lectures), float)
+for i in range(len(lectures)):
+    data_float[i] = float(lectures[i])
+
+final_data = np.array([time, data_float])
+
+file = open(data_out, "w")
+np.savetxt(file, final_data.T, "%.3f")
+file.close()
