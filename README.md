@@ -11,6 +11,7 @@ This is a set of three python scripts intended for numerical recognition in time
   numpy<br> 
   numba(optional)<br> 
   mpi4py(optional)<br> 
+  tesseract-ocr<br>
 
 ## Workflow
   Set of instructions in order to use the scripts. All functions needed are stored in funciones.py
