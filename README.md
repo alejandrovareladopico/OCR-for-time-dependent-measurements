@@ -20,7 +20,7 @@ This is a set of three python scripts intended for numerical recognition in time
   
   $ python3 Previsualization.py<br>
   
-  The script will ask you to introduce the name of the file to analyze, and several factors in order to determine region of interest and some image manipulations. Finally will ask you to select one language to read the data. Since tesseract works as a neural network, it has to be previously trained. The language file contain some pre-trained data that you can use. In the repository are also linked some trained data files for seven-segment-displays. The parameters that you have selected will be saved in a parameter file (.txt)
+  The script will ask you to introduce the name of the file to analyze, and several factors in order to determine region of interest and some image manipulations. Finally will ask you to select one language to read the data. Since tesseract works as a neural network, it has to be trained. The language files contain some pre-trained data that you can use. In the repository are also linked some trained data files for seven-segment-displays. The election of the languge will depend on the font characteristics of the numbers. The parameters that you have selected will be saved in a parameter file (.txt)
   
 ### Frame_Selection
  As in the first script, run in the terminal:<br>
